@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanadak — Software Engineering & Digital Solutions</title>
+  <meta name="description" content="We build digital products that solve real problems. Enterprise web applications, ERP systems, and modern software architecture." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Custom Alternating Theme Styles (Red First) -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="home">
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/images/logo.png" alt="Sanadak Logo" />
+        <span class="brand-name">Sanadak</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="mailto:sanadk@gamil.com" class="btn btn-outline-light" style="padding: 0.5rem 1.25rem;">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="mailto:sanadk@gamil.com" class="btn btn-outline-light" style="width: 100%; margin-top: 0.5rem;">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main class="main-content">
+    
+    <!-- Section 1: Hero Section (RED Theme) -->
+    <section class="hero-section-red section-red">
+      <div class="container">
+        <div class="hero-content reveal">
+          <h1 class="hero-title-white">
+            We build <span class="text-accent" style="color: var(--accent);">digital products</span> that solve real problems.
+          </h1>
+          <p class="hero-description-muted">
+            Sanadak is a software engineering team crafting high-performance web applications, enterprise business systems, and scalable digital solutions.
+          </p>
+          <div class="hero-actions">
+            <a href="projects.html" class="btn btn-primary">
+              View Projects <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="mailto:sanadk@gamil.com" class="btn btn-outline-light">
+              Contact Us <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Featured Projects Carousel Section (WHITE Theme) -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="section-header flex justify-between items-end flex-wrap gap-4 mb-8 reveal">
+          <div>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Highlights of our featured enterprise systems & production applications.</p>
+          </div>
+          <a href="projects.html" class="btn btn-outline-dark">
+            View All Work <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Featured Projects Carousel Slider -->
+        <div class="carousel-wrapper reveal delay-1">
+          <button type="button" class="carousel-nav-btn prev" id="carouselPrev" aria-label="Previous Slide">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Rendered via JavaScript -->
+          </div>
+
+          <button type="button" class="carousel-nav-btn next" id="carouselNext" aria-label="Next Slide">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          
+          <div class="carousel-dots" id="carouselDots">
+            <!-- Rendered via JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Tech Solutions Section (RED Theme) -->
+    <section class="section section-red">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <h2 class="section-title">Tech Solutions</h2>
+          <p class="section-subtitle">A powerhouse team of engineers, data scientists, and security experts ready to build the digital future for your business.</p>
+        </div>
+
+        <div class="services-grid" id="servicesContainer">
+          <!-- Rendered via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Team Section (WHITE Theme) -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <h2 class="section-title">Our Team</h2>
+          <p class="section-subtitle">Experienced builders and engineers dedicated to project success.</p>
+        </div>
+
+        <div class="team-grid" id="teamContainer">
+          <!-- Rendered via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Call to Action Section (RED Theme) -->
+    <section class="section section-red">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2 class="cta-title">Have a project in mind?</h2>
+          <p class="cta-desc">Let's discuss your requirements and engineer a solution tailored to your goals.</p>
+          <a href="mailto:sanadk@gamil.com?subject=Project Inquiry" class="btn btn-accent">
+            Let's Talk <i class="fas fa-paper-plane"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-left">
+        <!-- Col 1: Brand Info -->
+        <div>
+          <div class="brand-logo mb-3">
+            <img src="assets/images/logo.png" alt="Sanadak Logo" />
+            <span class="brand-name">Sanadak</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Premium software development team building enterprise-grade scalable solutions for modern businesses.
+          </p>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div>
+          <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">Links</h4>
+          <ul class="space-y-2 text-xs text-slate-300 font-medium">
+            <li><a href="projects.html" class="hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-amber-400"></i> Our Work</a></li>
+            <li><a href="index.html#teamContainer" class="hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fas fa-angle-right text-[10px] text-amber-400"></i> Our Team</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contact Info -->
+        <div>
+          <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">Contact Us</h4>
+          <ul class="space-y-2.5 text-xs text-slate-300">
+            <li class="flex items-center gap-2">
+              <i class="fas fa-phone text-amber-400"></i>
+              <a href="tel:+2001065937431" class="hover:text-amber-400 transition-colors">+20 0106 593 7431</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-envelope text-amber-400"></i>
+              <a href="mailto:sanadk@gamil.com" class="hover:text-amber-400 transition-colors">sanadk@gamil.com</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-globe text-amber-400"></i>
+              <a href="https://sanadk.fwh.is/?i=1" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors">sanadk.fwh.is</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Follow Us -->
+        <div>
+          <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">Follow Us</h4>
+          <a href="https://www.facebook.com/Sanadk65" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs text-slate-300 hover:text-amber-400 transition-colors bg-white/10 px-3 py-2 rounded-lg border border-white/10">
+            <i class="fab fa-facebook-f text-amber-400"></i> facebook.com/Sanadk65
+          </a>
+        </div>
+      </div>
+
+      <!-- Copyright Bottom Bar -->
+      <div class="pt-6 text-center text-xs text-slate-400">
+        &copy; 2026 Sanadak Software Team. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/team-data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
