@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Sanadk Software Portfolio</title>
+  <meta name="description"
+    content="Explore a collection of web platforms, ERP systems, and digital applications engineered by Sanadk ." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Custom Light/Dark Hybrid Theme Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body data-page="projects" style="background-color: #6b0f0f;">
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/images/logo.png" alt="Sanadk  Logo" />
+        <span class="brand-name">Sanadk </span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="projects.html" class="nav-link active">Projects</a></li>
+          <li><a href="mailto:sanadk@gamil.com" class="btn btn-outline-light" style="padding: 0.5rem 1.25rem;">Contact
+              Us</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="projects.html" class="nav-link active">Projects</a></li>
+        <li><a href="mailto:sanadk@gamil.com" class="btn btn-outline-light"
+            style="width: 100%; margin-top: 0.5rem;">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main class="main-content">
+
+    <section class="section" style="padding: 3rem 0 5rem;">
+      <div class="container">
+
+        <!-- Filter Top Bar matching Screenshot -->
+        <div
+          class="bg-[#1e0707] p-4 sm:p-6 rounded-3xl mb-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-white/10">
+
+          <!-- Search input on Left -->
+          <div class="relative w-full md:w-80">
+            <input type="text" id="searchInput" placeholder="Search projects..."
+              class="w-full bg-white text-slate-800 px-4 py-3 pl-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-medium text-sm shadow-inner" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+              stroke="currentColor" class="w-5 h-5 absolute left-3 top-3.5 text-slate-400">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m21-21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </div>
+
+          <!-- Dropdown Select Filters on Right -->
+          <div class="flex items-center gap-3 w-full md:w-auto">
+            <!-- Category Filter Dropdown -->
+            <select id="categorySelect"
+              class="w-full md:w-44 bg-white text-slate-800 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-semibold text-sm cursor-pointer shadow-inner">
+              <option value="all">All Categories</option>
+              <option value="web">Web Apps</option>
+              <option value="erp">ERP & Business</option>
+              <option value="mobile">Mobile</option>
+              <option value="ai">AI & Data</option>
+            </select>
+
+            <!-- Tech Stack Filter Dropdown -->
+            <select id="techSelect"
+              class="w-full md:w-44 bg-white text-slate-800 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 font-semibold text-sm cursor-pointer shadow-inner">
+              <option value="all">All Technologies</option>
+              <option value="Angular">Angular</option>
+              <option value="React">React</option>
+              <option value="TypeScript">TypeScript</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value=".NET">.NET</option>
+              <option value="Node.js">Node.js</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-left">
+        <!-- Col 1: Brand Info -->
+        <div>
+          <div class="brand-logo mb-3">
+            <img src="assets/images/logo.png" alt="Sanadk  Logo" />
+            <span class="brand-name">Sanadk </span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Premium software development team building enterprise-grade scalable solutions for modern businesses.
+          </p>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div>
+          <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">Links</h4>
+          <ul class="space-y-2 text-xs text-slate-300 font-medium">
+            <li><a href="projects.html" class="hover:text-amber-400 transition-colors flex items-center gap-1.5"><i
+                  class="fas fa-angle-right text-[10px] text-amber-400"></i> Our Work</a></li>
+            <li><a href="index.html#teamContainer"
+                class="hover:text-amber-400 transition-colors flex items-center gap-1.5"><i
+                  class="fas fa-angle-right text-[10px] text-amber-400"></i> Our Team</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contact Info -->
+        <div>
+          <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">Contact Us</h4>
+          <ul class="space-y-2.5 text-xs text-slate-300">
+            <li class="flex items-center gap-2">
+              <i class="fas fa-phone text-amber-400"></i>
+              <a href="tel:+2001065937431" class="hover:text-amber-400 transition-colors">+20 0106 593 7431</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-envelope text-amber-400"></i>
+              <a href="mailto:sanadk@gamil.com" class="hover:text-amber-400 transition-colors">sanadk@gamil.com</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fas fa-globe text-amber-400"></i>
+              <a href="https://sanadk.fwh.is/?i=1" target="_blank" rel="noopener"
+                class="hover:text-amber-400 transition-colors">sanadk.fwh.is</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Follow Us -->
+        <div>
+          <h4 class="text-sm font-bold text-amber-400 uppercase tracking-wider mb-4">Follow Us</h4>
+          <a href="https://www.facebook.com/Sanadk65" target="_blank" rel="noopener"
+            class="inline-flex items-center gap-2 text-xs text-slate-300 hover:text-amber-400 transition-colors bg-white/10 px-3 py-2 rounded-lg border border-white/10">
+            <i class="fab fa-facebook-f text-amber-400"></i> facebook.com/Sanadk65
+          </a>
+        </div>
+      </div>
+
+      <!-- Copyright Bottom Bar -->
+      <div class="pt-6 text-center text-xs text-slate-400">
+        &copy; 2026 Sanadk Software Team. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/team-data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

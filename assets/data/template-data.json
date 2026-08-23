@@ -1,0 +1,62 @@
+{
+  "siteConfig": {
+    "brandName": "Sanadk ",
+    "tagline": "We build digital products that solve real problems.",
+    "email": "sanadk@gamil.com",
+    "phone": "+20 0106 593 7431",
+    "website": "https://sanadk.fwh.is/?i=1"
+  },
+  "projects": [
+    {
+      "id": "1",
+      "slug": "ugetic-erp",
+      "title": "UGETIC ERP",
+      "tagline": "Enterprise financial and business management system for engineering offices.",
+      "category": "erp",
+      "categoryLabel": "ERP System",
+      "description": "UGETIC ERP is an all-in-one business management platform tailored specifically for engineering offices and consultancies.",
+      "image": "assets/images/projects/ugetic-thumb.svg",
+      "screenshots": ["assets/images/projects/ugetic-thumb.svg"],
+      "technologies": [
+        "Angular",
+        ".NET Core",
+        "SQL Server",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "role": "Frontend Development & UI Architecture",
+      "roleDetails": [
+        "Designed and developed responsive Angular frontend modules.",
+        "Implemented financial dashboard widgets with interactive charting."
+      ],
+      "features": [
+        "Comprehensive Financial & Billing Dashboard",
+        "Automated PDF Invoicing & Tax Calculation"
+      ],
+      "teamMembers": [
+        {
+          "name": "Ahmed Elmkkawi",
+          "role": "Frontend Architect"
+        },
+        {
+          "name": "Sanadk  Software Team",
+          "role": "Backend & Database"
+        }
+      ],
+      "links": {
+        "live": "https://sanadk.fwh.is/?i=1",
+        "github": "https://github.com/"
+      },
+      "featured": true
+    }
+  ],
+  "team": [
+    {
+      "id": "m1",
+      "name": "Ahmed Elmkkawi",
+      "role": "Frontend Developer & System Architect",
+      "avatar": "assets/images/team/member1.svg",
+      "skills": ["Angular", "React", "TypeScript", "Tailwind CSS"]
+    }
+  ]
+}
