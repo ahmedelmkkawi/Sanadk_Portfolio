@@ -14,7 +14,7 @@ const PORTFOLIO_DATA = {
     tagline: "We build digital products that solve real problems.",
     email: "sanadk@gamil.com",
     phone: "+20 0106 593 7431",
-    website: "https://sanadk.fwh.is/?i=1",
+    website: "https://portfolio.sanadk.org",
     facebook: "https://www.facebook.com/Sanadk65",
     linkedin: "https://www.linkedin.com/company/sanadkhub/",
     github: "https://github.com/",
@@ -101,7 +101,7 @@ const PORTFOLIO_DATA = {
         },
       ],
       links: {
-        live: "https://sanadk.fwh.is/?i=1",
+        live: "https://portfolio.sanadk.org",
         github: "https://github.com/",
       },
       featured: true,
@@ -142,7 +142,7 @@ const PORTFOLIO_DATA = {
         },
       ],
       links: {
-        live: "https://sanadk.fwh.is/?i=1",
+        live: "https://portfolio.sanadk.org",
         github: "https://github.com/",
       },
       featured: true,
