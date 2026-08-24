@@ -320,19 +320,87 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
   background-color: var(--bg-red);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .hero-content {
-  max-width: 760px;
+  max-width: 960px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-title-white {
-  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-size: clamp(1.75rem, 4.4vw, 3.85rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 1.25rem;
-  line-height: 1.1;
+  line-height: 1.25;
   color: #ffffff;
+}
+
+.hero-title-line {
+  display: block;
+  white-space: nowrap;
+  min-height: 1.25em;
+  line-height: 1.25;
+}
+
+.hero-title-second {
+  margin-top: 0.2em;
+  min-height: 1.25em;
+  line-height: 1.25;
+}
+
+/* Typewriter Dynamic Text Animation */
+.typewriter-container {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  vertical-align: baseline;
+  white-space: nowrap;
+  min-height: 1.25em;
+  line-height: 1.25;
+}
+
+.typewriter-text {
+  display: inline-block;
+  color: var(--accent);
+  text-shadow: 0 0 24px rgba(201, 168, 76, 0.45);
+  font-weight: 800;
+  position: relative;
+  min-height: 1.25em;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 300;
+  margin-left: 2px;
+  animation: typewriterCursorBlink 0.8s infinite;
+  text-shadow: 0 0 12px rgba(201, 168, 76, 0.8);
+  user-select: none;
+}
+
+@keyframes typewriterCursorBlink {
+  0%, 45% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
 }
 
 .hero-description-muted {
@@ -930,8 +998,139 @@ h1, h2, h3, h4, h5, h6 {
     min-height: auto;
     padding: 4rem 0 3.5rem;
   }
+
+  .hero-title-white {
+    font-size: clamp(1.35rem, 5.6vw, 2.15rem);
+  }
   
   .section {
     padding: 3.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title-white {
+    font-size: clamp(1.18rem, 5.2vw, 1.5rem);
+  }
+}
+
+/* ==========================================================================
+   Interactive Enhancements: Custom Cursor & Magnetic System
+   ========================================================================== */
+
+/* Magnetic Buttons base transition */
+.btn, .filter-btn, .carousel-nav-btn {
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+/* Custom Interactive Cursor (Active only on non-touch desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    will-change: transform;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .custom-cursor.active {
+    opacity: 1;
+  }
+
+  .cursor-dot {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 0 12px rgba(201, 168, 76, 0.9);
+  }
+
+  .cursor-ring {
+    position: absolute;
+    top: -18px;
+    left: -18px;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(201, 168, 76, 0.65);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  .cursor-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3b0808;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Hovering Links & Standard Buttons */
+  .custom-cursor.hovering-link .cursor-ring {
+    width: 52px;
+    height: 52px;
+    top: -26px;
+    left: -26px;
+    background-color: rgba(201, 168, 76, 0.2);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.35);
+  }
+
+  .custom-cursor.hovering-link .cursor-dot {
+    transform: scale(0.4);
+    opacity: 0.6;
+  }
+
+  /* Hovering Cards (Project Cards, Carousel, Team Cards, Services) */
+  .custom-cursor.hovering-card .cursor-ring {
+    width: 76px;
+    height: 76px;
+    top: -38px;
+    left: -38px;
+    background-color: rgba(201, 168, 76, 0.95);
+    border-color: #ffffff;
+    box-shadow: 0 0 30px rgba(201, 168, 76, 0.7), 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .custom-cursor.hovering-card .cursor-dot {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .custom-cursor.hovering-card .cursor-label {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .custom-cursor.hidden {
+    opacity: 0 !important;
+  }
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
   }
 }

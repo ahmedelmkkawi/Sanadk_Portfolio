@@ -57,22 +57,25 @@
   <main class="main-content">
 
     <!-- Section 1: Hero Section (RED Theme) -->
-    <section class="hero-section-red section-red">
+    <section class="hero-section-red section-red" id="heroSection">
+      <!-- Interactive Tech Mesh Background Canvas -->
+      <canvas id="heroCanvas" class="hero-canvas"></canvas>
+
       <div class="container">
         <div class="hero-content reveal">
           <h1 class="hero-title-white">
-            We build <span class="text-accent" style="color: var(--accent);">digital products</span> that solve real
-            problems.
+            <span class="hero-title-line">We build <span class="typewriter-container"><span class="typewriter-text" id="dynamicHeroText">digital products</span><span class="typewriter-cursor">|</span></span></span>
+            <span class="hero-title-line hero-title-second">that solve real problems.</span>
           </h1>
           <p class="hero-description-muted">
             Sanadk is a software engineering team crafting high-performance web applications, enterprise business
             systems, and scalable digital solutions.
           </p>
           <div class="hero-actions">
-            <a href="projects.html" class="btn btn-primary">
+            <a href="projects.html" class="btn btn-primary" data-magnetic>
               View Projects <i class="fas fa-arrow-right"></i>
             </a>
-            <a href="mailto:sanadk@gamil.com" class="btn btn-outline-light">
+            <a href="mailto:sanadk@gamil.com" class="btn btn-outline-light" data-magnetic>
               Contact Us <i class="fas fa-envelope"></i>
             </a>
           </div>

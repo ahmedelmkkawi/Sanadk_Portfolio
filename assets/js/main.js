@@ -6,11 +6,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   highlightActiveNav();
+  initCustomCursor();
+  initMagneticButtons();
 
   const page = document.body.dataset.page;
 
   if (page === "home") {
     initHomePage();
+    initHeroMesh();
+    initDynamicHeroText();
   } else if (page === "projects") {
     initProjectsPage();
   } else if (page === "project-detail") {
@@ -114,12 +118,18 @@ function createProjectCardHTML(project, index = 0) {
 
     if (avatar) {
       teamAvatarHTML = `
-        <img src="${avatar}" alt="${name}" title="${name}" class="w-8 h-8 rounded-full object-cover border border-amber-400/40" />
+        <div class="flex items-center gap-2">
+          <img src="${avatar}" alt="${name}" title="${name}" class="w-8 h-8 rounded-full object-cover border border-amber-400/40 shadow-sm" />
+          <span class="text-xs font-semibold text-neutral-300 group-hover:text-white transition-colors">${name}</span>
+        </div>
       `;
     } else {
       teamAvatarHTML = `
-        <div class="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 font-extrabold flex items-center justify-center text-xs" title="${name}">
-          ${initial}
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 font-extrabold flex items-center justify-center text-xs" title="${name}">
+            ${initial}
+          </div>
+          <span class="text-xs font-semibold text-neutral-300 group-hover:text-white transition-colors">${name}</span>
         </div>
       `;
     }
@@ -141,7 +151,7 @@ function createProjectCardHTML(project, index = 0) {
           : "delay-3";
 
   return `
-    <article class="reveal ${delayClass} group flex flex-col h-[480px] bg-[#6f0f0f] border border-white/10 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-1">
+    <a href="project.html?project=${project.slug}" class="project-card reveal ${delayClass} group flex flex-col h-[480px] bg-[#6f0f0f] border border-white/10 hover:border-amber-400/40 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-amber-950/40 cursor-pointer block text-left">
       <!-- Image Thumbnail -->
       <div class="relative h-52 overflow-hidden bg-neutral-900 flex-shrink-0">
         <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
@@ -177,20 +187,20 @@ function createProjectCardHTML(project, index = 0) {
               ${
                 project.links && project.links.live
                   ? `
-                <a href="${project.links.live}" target="_blank" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10" title="Live Preview">
+                <span onclick="event.preventDefault(); event.stopPropagation(); window.open('${project.links.live}', '_blank');" class="p-2 rounded-xl bg-white/10 hover:bg-amber-400 hover:text-black text-white transition-all border border-white/10 cursor-pointer shadow-sm" title="Live Preview">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
+                </span>
               `
                   : ""
               }
-              <a href="project.html?project=${project.slug}" class="bg-[#d97706] hover:bg-[#b45309] text-white font-extrabold text-xs px-4 py-2 rounded-xl transition-all shadow-md">
-                Details
-              </a>
+              <span class="w-8 h-8 rounded-xl bg-white/10 group-hover:bg-amber-400 group-hover:text-black text-amber-300 flex items-center justify-center transition-all duration-300 border border-white/10 group-hover:border-amber-400">
+                <i class="fas fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-0.5"></i>
+              </span>
             </div>
           </div>
         </div>
       </div>
-    </article>
+    </a>
   `;
 }
 
@@ -908,4 +918,388 @@ function initProjectDetailPage() {
 
   // Re-observe reveals
   initScrollReveal();
+}
+
+/* ==========================================================================
+   Interactive Feature 4: Custom Interactive Cursor & Magnetic Buttons
+   ========================================================================== */
+function initCustomCursor() {
+  // Check if touch device
+  if (window.matchMedia("(hover: none) or (pointer: coarse)").matches) {
+    return;
+  }
+
+  // Create cursor DOM elements if not already present
+  let cursor = document.getElementById("customCursor");
+  if (!cursor) {
+    cursor = document.createElement("div");
+    cursor.id = "customCursor";
+    cursor.className = "custom-cursor";
+    cursor.innerHTML = `
+      <div class="cursor-dot"></div>
+      <div class="cursor-ring">
+        <span class="cursor-label"></span>
+      </div>
+    `;
+    document.body.appendChild(cursor);
+  }
+
+  const cursorLabel = cursor.querySelector(".cursor-label");
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let currentX = -100;
+  let currentY = -100;
+  let isVisible = false;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isVisible) {
+      isVisible = true;
+      cursor.classList.add("active");
+      cursor.classList.remove("hidden");
+    }
+  });
+
+  document.addEventListener("mouseleave", () => {
+    cursor.classList.add("hidden");
+    isVisible = false;
+  });
+
+  document.addEventListener("mouseenter", () => {
+    cursor.classList.remove("hidden");
+  });
+
+  // Smooth lerp follow loop
+  function renderCursor() {
+    currentX += (mouseX - currentX) * 0.18;
+    currentY += (mouseY - currentY) * 0.18;
+
+    cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+
+  // Delegate hover states across document
+  document.addEventListener("mouseover", (e) => {
+    // Check for interactive cards (Project Card, Carousel Slide, Team Member, Service Card)
+    const card = e.target.closest(
+      ".project-card, .carousel-slide, .team-card, .service-card, .slide-image-box, .detail-image-box"
+    );
+    if (card) {
+      cursor.classList.add("hovering-card");
+      cursor.classList.remove("hovering-link");
+      if (card.closest(".team-card")) {
+        cursorLabel.textContent = "Team";
+      } else if (card.closest(".service-card")) {
+        cursorLabel.textContent = "Explore";
+      } else {
+        cursorLabel.textContent = "View";
+      }
+      return;
+    }
+
+    // Check for clickable links & buttons
+    const linkOrBtn = e.target.closest(
+      "a, button, .btn, .filter-btn, .carousel-nav-btn, .carousel-dot, input, select"
+    );
+    if (linkOrBtn) {
+      cursor.classList.add("hovering-link");
+      cursor.classList.remove("hovering-card");
+      cursorLabel.textContent = "";
+      return;
+    }
+
+    // Default
+    cursor.classList.remove("hovering-link", "hovering-card");
+    cursorLabel.textContent = "";
+  });
+}
+
+function initMagneticButtons() {
+  if (window.matchMedia("(hover: none) or (pointer: coarse)").matches) {
+    return;
+  }
+
+  // Use delegation for magnetic buttons so dynamic elements (like carousel buttons, project cards) also work
+  document.addEventListener("mousemove", (e) => {
+    const target = e.target.closest(".btn, [data-magnetic], .carousel-nav-btn");
+    if (!target) return;
+
+    const rect = target.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - centerX) * 0.25;
+    const deltaY = (e.clientY - centerY) * 0.25;
+
+    target.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+  });
+
+  document.addEventListener("mouseout", (e) => {
+    const target = e.target.closest(".btn, [data-magnetic], .carousel-nav-btn");
+    if (target && !target.contains(e.relatedTarget)) {
+      target.style.transform = "";
+    }
+  });
+}
+
+/* ==========================================================================
+   Interactive Feature 2: Tech Mesh Particle Constellation Canvas
+   ========================================================================== */
+function initHeroMesh() {
+  const canvas = document.getElementById("heroCanvas");
+  const heroSection = document.getElementById("heroSection");
+  if (!canvas || !heroSection) return;
+
+  const ctx = canvas.getContext("2d");
+  let width = (canvas.width = heroSection.offsetWidth);
+  let height = (canvas.height = heroSection.offsetHeight);
+
+  let animationFrameId;
+  let isHeroVisible = true;
+
+  // Track mouse coordinates relative to hero canvas
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 170,
+  };
+
+  heroSection.addEventListener("mousemove", (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  heroSection.addEventListener("mouseleave", () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  // Handle Resize
+  function handleResize() {
+    if (!heroSection || !canvas) return;
+    width = canvas.width = heroSection.offsetWidth;
+    height = canvas.height = heroSection.offsetHeight;
+    createParticles();
+  }
+
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(handleResize, 150);
+  });
+
+  // Pause when off-screen to save performance
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isHeroVisible = entry.isIntersecting;
+          if (isHeroVisible && !animationFrameId) {
+            animate();
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(heroSection);
+  }
+
+  // Particle Class
+  class Particle {
+    constructor() {
+      this.reset();
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.7;
+      this.vy = (Math.random() - 0.5) * 0.7;
+      this.radius = Math.random() * 1.8 + 1.2;
+      this.baseAlpha = Math.random() * 0.4 + 0.3;
+      this.isGold = Math.random() > 0.45;
+      this.pulseSpeed = Math.random() * 0.02 + 0.01;
+      this.pulseAngle = Math.random() * Math.PI * 2;
+    }
+
+    update() {
+      this.pulseAngle += this.pulseSpeed;
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Bounce smoothly off boundaries
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+
+      // Subtle interaction with mouse
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouse.radius && dist > 0) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          // Gentle attraction
+          this.x += (dx / dist) * force * 0.8;
+          this.y += (dy / dist) * force * 0.8;
+        }
+      }
+    }
+
+    draw() {
+      const dynamicAlpha =
+        this.baseAlpha + Math.sin(this.pulseAngle) * 0.2;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.isGold
+        ? `rgba(201, 168, 76, ${Math.max(0.15, dynamicAlpha)})`
+        : `rgba(255, 255, 255, ${Math.max(0.1, dynamicAlpha * 0.8)})`;
+      ctx.fill();
+    }
+  }
+
+  let particles = [];
+
+  function createParticles() {
+    particles = [];
+    const count = Math.min(
+      Math.max(Math.floor((width * height) / 16000), 32),
+      68
+    );
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  createParticles();
+
+  function drawConnections() {
+    const maxDist = 120;
+    const maxDistSq = maxDist * maxDist;
+
+    for (let i = 0; i < particles.length; i++) {
+      const p1 = particles[i];
+
+      // Draw line to mouse if close
+      if (mouse.x !== null && mouse.y !== null) {
+        const dmx = mouse.x - p1.x;
+        const dmy = mouse.y - p1.y;
+        const distMouseSq = dmx * dmx + dmy * dmy;
+        const mouseRadiusSq = mouse.radius * mouse.radius;
+
+        if (distMouseSq < mouseRadiusSq) {
+          const mouseAlpha = (1 - Math.sqrt(distMouseSq) / mouse.radius) * 0.45;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(201, 168, 76, ${mouseAlpha})`;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+      }
+
+      // Draw line to neighboring particles
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < maxDistSq) {
+          const alpha = (1 - Math.sqrt(distSq) / maxDist) * 0.22;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle =
+            p1.isGold || p2.isGold
+              ? `rgba(201, 168, 76, ${alpha})`
+              : `rgba(255, 255, 255, ${alpha * 0.7})`;
+          ctx.lineWidth = 0.75;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    if (!isHeroVisible) {
+      animationFrameId = null;
+      return;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+
+    drawConnections();
+
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+/* ==========================================================================
+   Interactive Feature 5: Dynamic Typewriter Text in Hero Title
+   ========================================================================== */
+function initDynamicHeroText() {
+  const dynamicTextElem = document.getElementById("dynamicHeroText");
+  if (!dynamicTextElem) return;
+
+  const words = [
+    "digital products",
+    "enterprise ERPs",
+    "scalable web apps",
+    "cloud solutions",
+    "smart software",
+  ];
+
+  let wordIndex = 0;
+  let charIndex = words[0].length;
+  let isDeleting = true;
+  let typingDelay = 2200; // Wait 2.2s before deleting initial word
+
+  function typeLoop() {
+    const currentWord = words[wordIndex];
+
+    if (isDeleting) {
+      // Erase character by character
+      charIndex--;
+      const text = currentWord.substring(0, charIndex);
+      dynamicTextElem.textContent = text || "\u00A0";
+      typingDelay = 45; // Fast erasing
+    } else {
+      // Type character by character
+      charIndex++;
+      const text = currentWord.substring(0, charIndex);
+      dynamicTextElem.textContent = text || "\u00A0";
+      typingDelay = 90; // Natural typing rhythm
+    }
+
+    // Finished typing the entire word
+    if (!isDeleting && charIndex === currentWord.length) {
+      isDeleting = true;
+      typingDelay = 2200; // Pause to let user read
+    }
+    // Finished erasing the word
+    else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      typingDelay = 400; // Small pause before typing next word
+    }
+
+    setTimeout(typeLoop, typingDelay);
+  }
+
+  setTimeout(typeLoop, typingDelay);
 }
