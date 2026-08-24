@@ -25,6 +25,5 @@ jobs:
           echo '186.241.21.20 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfaj41kvSoP7yh3HY1czL59uPZ2V5k5OgsMWFgv/DAG' > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
-          # This key is forced-command restricted on the server: whatever is
-          # sent here, sshd runs /opt/sanadk-portfolio/deploy.sh and nothing else.
-          ssh -i ~/.ssh/deploy_key -o BatchMode=yes root@186.241.21.20 deploy
+          ssh -i ~/.ssh/deploy_key -o BatchMode=yes root@186.241.21.20 \
+            bash /opt/sanadk-portfolio/deploy.sh
