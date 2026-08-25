@@ -131,7 +131,7 @@ const TEAM_DATA = [
     name: "Adel Reda",
     role: "Backend Developer",
     avatar: "assets/images/team/Adel.jpeg",
-    bio: "Data Scientist building machine learning pipelines, predictive analytics models, and automated reporting systems.",
+    bio: "Backend Engineer specialized in enterprise microservices, databases, and high-performance REST APIs.",
     skills: ["PHP", "Laravel", "REST APIs", "MySQL"],
     socialLinks: {
       linkedin: "",
