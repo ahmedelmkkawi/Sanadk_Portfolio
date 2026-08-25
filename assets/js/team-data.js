@@ -130,7 +130,7 @@ const TEAM_DATA = [
     id: "Adel",
     name: "Adel Reda",
     role: "Backend Developer",
-    avatar: "assets/images/team/adel.jpeg",
+    avatar: "assets/images/team/Adel.jpeg",
     bio: "Data Scientist building machine learning pipelines, predictive analytics models, and automated reporting systems.",
     skills: ["PHP", "Laravel", "REST APIs", "MySQL"],
     socialLinks: {
