@@ -77,8 +77,8 @@ const TEAM_DATA = [
     bio: "Frontend Engineer experienced in building web applications.",
     skills: ["Node.js", "React", "TypeScript", "MongoDB", "Express"],
     socialLinks: {
-      linkedin: "https://www.linkedin.com/company/sanadkhub/",
-      github: "https://github.com/",
+      linkedin: "",
+      github: "",
     },
     activeProjects: [],
   },
@@ -91,7 +91,7 @@ const TEAM_DATA = [
     skills: ["React", "TypeScript", "HTML5", "CSS3", "REST APIs"],
     socialLinks: {
       linkedin: "https://www.linkedin.com/in/mahmoud-elmasry-97081623a/",
-      github: "https://github.com/",
+      github: "",
     },
     activeProjects: [""],
   },
@@ -109,7 +109,7 @@ const TEAM_DATA = [
     ],
     socialLinks: {
       linkedin: "",
-      github: "https://github.com/",
+      github: "",
     },
     activeProjects: [],
   },
@@ -134,8 +134,8 @@ const TEAM_DATA = [
     bio: "Data Scientist building machine learning pipelines, predictive analytics models, and automated reporting systems.",
     skills: ["PHP", "Laravel", "REST APIs", "MySQL"],
     socialLinks: {
-      linkedin: "https://www.linkedin.com/company/sanadkhub/",
-      github: "https://github.com/",
+      linkedin: "",
+      github: "",
     },
     activeProjects: [""],
   },

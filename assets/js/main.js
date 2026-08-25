@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu();
   highlightActiveNav();
   initCustomCursor();
-  initMagneticButtons();
 
   const page = document.body.dataset.page;
 
@@ -921,7 +920,7 @@ function initProjectDetailPage() {
 }
 
 /* ==========================================================================
-   Interactive Feature 4: Custom Interactive Cursor & Magnetic Buttons
+   Interactive Feature 4: Custom Interactive Cursor
    ========================================================================== */
 function initCustomCursor() {
   // Check if touch device
@@ -937,14 +936,10 @@ function initCustomCursor() {
     cursor.className = "custom-cursor";
     cursor.innerHTML = `
       <div class="cursor-dot"></div>
-      <div class="cursor-ring">
-        <span class="cursor-label"></span>
-      </div>
+      <div class="cursor-ring"></div>
     `;
     document.body.appendChild(cursor);
   }
-
-  const cursorLabel = cursor.querySelector(".cursor-label");
 
   let mouseX = -100;
   let mouseY = -100;
@@ -991,13 +986,6 @@ function initCustomCursor() {
     if (card) {
       cursor.classList.add("hovering-card");
       cursor.classList.remove("hovering-link");
-      if (card.closest(".team-card")) {
-        cursorLabel.textContent = "Team";
-      } else if (card.closest(".service-card")) {
-        cursorLabel.textContent = "Explore";
-      } else {
-        cursorLabel.textContent = "View";
-      }
       return;
     }
 
@@ -1008,41 +996,11 @@ function initCustomCursor() {
     if (linkOrBtn) {
       cursor.classList.add("hovering-link");
       cursor.classList.remove("hovering-card");
-      cursorLabel.textContent = "";
       return;
     }
 
     // Default
     cursor.classList.remove("hovering-link", "hovering-card");
-    cursorLabel.textContent = "";
-  });
-}
-
-function initMagneticButtons() {
-  if (window.matchMedia("(hover: none) or (pointer: coarse)").matches) {
-    return;
-  }
-
-  // Use delegation for magnetic buttons so dynamic elements (like carousel buttons, project cards) also work
-  document.addEventListener("mousemove", (e) => {
-    const target = e.target.closest(".btn, [data-magnetic], .carousel-nav-btn");
-    if (!target) return;
-
-    const rect = target.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const deltaX = (e.clientX - centerX) * 0.25;
-    const deltaY = (e.clientY - centerY) * 0.25;
-
-    target.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
-  });
-
-  document.addEventListener("mouseout", (e) => {
-    const target = e.target.closest(".btn, [data-magnetic], .carousel-nav-btn");
-    if (target && !target.contains(e.relatedTarget)) {
-      target.style.transform = "";
-    }
   });
 }
 

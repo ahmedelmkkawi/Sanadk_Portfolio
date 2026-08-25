@@ -1015,14 +1015,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   Interactive Enhancements: Custom Cursor & Magnetic System
+   Interactive Enhancements: Custom Cursor System
    ========================================================================== */
-
-/* Magnetic Buttons base transition */
-.btn, .filter-btn, .carousel-nav-btn {
-  will-change: transform;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
-}
 
 /* Custom Interactive Cursor (Active only on non-touch desktop) */
 @media (hover: hover) and (pointer: fine) {
@@ -1074,54 +1068,36 @@ h1, h2, h3, h4, h5, h6 {
                 box-shadow 0.3s ease;
   }
 
-  .cursor-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #3b0808;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none;
-    user-select: none;
-  }
-
   /* Hovering Links & Standard Buttons */
   .custom-cursor.hovering-link .cursor-ring {
-    width: 52px;
-    height: 52px;
-    top: -26px;
-    left: -26px;
-    background-color: rgba(201, 168, 76, 0.2);
+    width: 48px;
+    height: 48px;
+    top: -24px;
+    left: -24px;
+    background-color: rgba(201, 168, 76, 0.15);
     border-color: var(--accent);
     box-shadow: 0 0 20px rgba(201, 168, 76, 0.35);
   }
 
   .custom-cursor.hovering-link .cursor-dot {
-    transform: scale(0.4);
-    opacity: 0.6;
+    transform: scale(0.5);
+    opacity: 0.8;
   }
 
   /* Hovering Cards (Project Cards, Carousel, Team Cards, Services) */
   .custom-cursor.hovering-card .cursor-ring {
-    width: 76px;
-    height: 76px;
-    top: -38px;
-    left: -38px;
-    background-color: rgba(201, 168, 76, 0.95);
-    border-color: #ffffff;
-    box-shadow: 0 0 30px rgba(201, 168, 76, 0.7), 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 54px;
+    height: 54px;
+    top: -27px;
+    left: -27px;
+    background-color: rgba(201, 168, 76, 0.12);
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(201, 168, 76, 0.4);
   }
 
   .custom-cursor.hovering-card .cursor-dot {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  .custom-cursor.hovering-card .cursor-label {
-    opacity: 1;
-    transform: scale(1);
+    transform: scale(0.6);
+    opacity: 0.9;
   }
 
   .custom-cursor.hidden {
